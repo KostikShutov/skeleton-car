@@ -1,8 +1,8 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install gcc -y \
+    && apt-get install gcc git -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

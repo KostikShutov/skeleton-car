@@ -3,17 +3,16 @@
 import json
 import eventlet
 import socketio
-from controllers.ControllerResolver import ControllerResolver
-from commands.CommandService import CommandService
-from utils.Config import config
+from car.service.StateService import stateService
+from executor.CommandCoordinator import CommandCoordinator
+from utils.Env import env
 
 eventlet.monkey_patch()
-mgr = socketio.RedisManager('redis://%s:%s' % (config['REDIS_HOST'], config['REDIS_PORT']))
+mgr = socketio.RedisManager('redis://%s:%s' % (env['REDIS_HOST'], env['REDIS_PORT']))
 sio = socketio.Server(cors_allowed_origins='*', client_manager=mgr)
 app = socketio.WSGIApp(sio)
-configToken: str = config['TOKEN']
-controller = ControllerResolver().resolve()
-commandService = CommandService(socketManager=mgr)
+configToken: str = env['TOKEN']
+commandCoordinator: CommandCoordinator = CommandCoordinator(socketManager=mgr)
 
 
 @sio.event
@@ -34,32 +33,32 @@ def disconnect(sid: str) -> None:
 
 @sio.event
 def state(sid: str) -> str:
-    return json.dumps(controller.state())
+    return json.dumps(stateService.state())
 
 
 @sio.event
 def pushCommands(sid: str, payloads: list) -> str:
-    return json.dumps(commandService.pushCommands(payloads))
+    return json.dumps(commandCoordinator.pushCommands(payloads))
 
 
 @sio.event
 def pushCommand(sid: str, payload: object) -> str:
-    return str(commandService.pushCommand(payload))
+    return str(commandCoordinator.pushCommand(payload))
 
 
 @sio.event
 def revokeCommand(sid: str, commandId: str) -> None:
-    commandService.revokeCommand(commandId)
+    commandCoordinator.revokeCommand(commandId)
 
 
 @sio.event
 def statusCommand(sid: str, commandId: str) -> str:
-    return commandService.getCommandStatus(commandId)
+    return commandCoordinator.getCommandStatus(commandId)
 
 
 @sio.event
 def purgeCommands(sid: str) -> None:
-    commandService.purgeCommands()
+    commandCoordinator.purgeCommands()
 
 
 if __name__ == '__main__':

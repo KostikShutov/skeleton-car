@@ -1,12 +1,12 @@
-from utils.Config import config
+from utils.Env import env
 from celery import Celery
 
-host: str = config['RABBITMQ_HOST']
+host: str = env['RABBITMQ_HOST']
 
 app = Celery('commands',
              broker=host,
              backend='rpc://',
-             include=['commands.tasks'])
+             include=['executor.tasks'])
 
 app.conf.update(
     result_expires=3600,

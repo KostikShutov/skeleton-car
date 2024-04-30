@@ -1,13 +1,13 @@
 from dotenv import dotenv_values
 
 
-def mergeConfigs(firstConfig: dict, secondConfig: dict) -> dict:
+def mergeEnvs(firstConfig: dict, secondConfig: dict) -> dict:
     result = firstConfig.copy()
     result.update(secondConfig)
     return result
 
 
-config: dict = mergeConfigs(
+env: dict = mergeEnvs(
     dotenv_values('.env'),
     dotenv_values('.env.local'),
 )

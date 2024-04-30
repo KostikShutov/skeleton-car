@@ -1,10 +1,4 @@
 class ControllerInterface:
-    def init(self) -> None:
-        pass
-
-    def state(self) -> dict:
-        pass
-
     def speed(self, speed: int) -> None:
         pass
 
@@ -14,7 +8,7 @@ class ControllerInterface:
     def backward(self, speed: int = None) -> None:
         pass
 
-    def stop(self) -> None:
+    def stop(self, duration: float) -> None:
         pass
 
     def left(self) -> None:

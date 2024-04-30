@@ -1,6 +1,6 @@
 import logging
 import RPi.GPIO as GPIO
-import controllers.car.PCA9685 as PCA9685
+import car.PCA9685 as PCA9685
 
 
 class Motor(object):

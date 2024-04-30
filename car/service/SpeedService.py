@@ -1,13 +1,14 @@
 from utils.Redis import redis
 
 
-class SpeedService:
+class _SpeedService:
     MIN_SPEED: int = 0
     INIT_SPEED: int = 60
     MAX_SPEED: int = 100
 
-    def init(self) -> None:
-        self.setSpeed(self.INIT_SPEED)
+    def __init__(self) -> None:
+        if not redis.exists('currentSpeed'):
+            self.setSpeed(self.INIT_SPEED)
 
     def getCurrentSpeed(self) -> int:
         return int(redis.get('currentSpeed').decode('utf-8'))
@@ -28,3 +29,6 @@ class SpeedService:
             redis.set('currentSpeed', self.MAX_SPEED)
         else:
             redis.set('currentSpeed', speed)
+
+
+speedService: _SpeedService = _SpeedService()

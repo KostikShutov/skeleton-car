@@ -1,13 +1,14 @@
 from utils.Redis import redis
 
 
-class AngleService:
+class _AngleService:
     MIN_ANGLE: int = -45
     INIT_ANGLE: int = 0
     MAX_ANGLE: int = 45
 
-    def init(self) -> None:
-        self.setAngle(self.INIT_ANGLE)
+    def __init__(self) -> None:
+        if not redis.exists('currentAngle'):
+            self.setAngle(self.INIT_ANGLE)
 
     def getCurrentAngle(self, withCast: bool = False) -> int:
         angle: int = int(redis.get('currentAngle').decode('utf-8'))
@@ -33,3 +34,6 @@ class AngleService:
             redis.set('currentAngle', self.MAX_ANGLE)
         else:
             redis.set('currentAngle', angle)
+
+
+angleService: _AngleService = _AngleService()

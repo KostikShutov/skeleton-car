@@ -28,4 +28,4 @@ server:
 
 .PHONY: worker
 worker:
-	docker compose run --rm -w /code python-picar python -m celery -A commands worker --concurrency=1 -l INFO
+	docker compose run --rm -w /code python-picar python -m celery -A executor worker --concurrency=1 -l INFO

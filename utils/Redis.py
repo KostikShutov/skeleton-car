@@ -1,6 +1,6 @@
 import redis
-from utils.Config import config
+from utils.Env import env
 
-host: str = config['REDIS_HOST']
-port: int = config['REDIS_PORT']
+host: str = env['REDIS_HOST']
+port: int = env['REDIS_PORT']
 redis = redis.Redis(host=host, port=port)

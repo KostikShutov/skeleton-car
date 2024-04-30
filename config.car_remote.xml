@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<Config>
+    <Commands>
+        <Command>
+            <Name>SPEED</Name>
+            <Params>
+                <Param name="speed"/>
+            </Params>
+        </Command>
+        <Command>
+            <Name>FORWARD</Name>
+            <Params>
+                <Param name="speed"/>
+                <Param name="duration"/>
+            </Params>
+        </Command>
+        <Command>
+            <Name>BACKWARD</Name>
+            <Params>
+                <Param name="speed"/>
+                <Param name="duration"/>
+            </Params>
+        </Command>
+        <Command>
+            <Name>MOVE</Name>
+            <Params>
+                <Param name="speed"/>
+                <Param name="duration"/>
+                <Param name="steering"/>
+            </Params>
+        </Command>
+        <Command>
+            <Name>STOP</Name>
+            <Params>
+                <Param name="duration"/>
+            </Params>
+        </Command>
+        <Command>
+            <Name>LEFT</Name>
+            <Params>
+            </Params>
+        </Command>
+        <Command>
+            <Name>STRAIGHT</Name>
+            <Params>
+            </Params>
+        </Command>
+        <Command>
+            <Name>RIGHT</Name>
+            <Params>
+            </Params>
+        </Command>
+        <Command>
+            <Name>TURN</Name>
+            <Params>
+                <Param name="steering"/>
+            </Params>
+        </Command>
+        <Command>
+            <Name>CAMERA_LEFT</Name>
+            <Params>
+            </Params>
+        </Command>
+        <Command>
+            <Name>CAMERA_RIGHT</Name>
+            <Params>
+            </Params>
+        </Command>
+        <Command>
+            <Name>CAMERA_UP</Name>
+            <Params>
+            </Params>
+        </Command>
+        <Command>
+            <Name>CAMERA_DOWN</Name>
+            <Params>
+            </Params>
+        </Command>
+    </Commands>
+    <Drivers>
+        <Driver>
+            <Name>SPEED_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/speed</Module>
+            <Params>
+                <Param name="speed"/>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>FORWARD_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/forward</Module>
+            <Params>
+                <Param name="speed"/>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>BACKWARD_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/backward</Module>
+            <Params>
+                <Param name="speed"/>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>STOP_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/stop</Module>
+            <Params>
+                <Param name="duration"/>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>LEFT_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/left</Module>
+            <Params>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>STRAIGHT_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/straight</Module>
+            <Params>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>RIGHT_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/right</Module>
+            <Params>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>TURN_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/turn</Module>
+            <Params>
+                <Param name="angle"/>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>CAMERA_LEFT_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/cameraLeft</Module>
+            <Params>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>CAMERA_RIGHT_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/cameraRight</Module>
+            <Params>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>CAMERA_UP_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/cameraUp</Module>
+            <Params>
+            </Params>
+        </Driver>
+        <Driver>
+            <Name>CAMERA_DOWN_DRIVER</Name>
+            <Module>car.RemoteController/RemoteController/cameraDown</Module>
+            <Params>
+            </Params>
+        </Driver>
+    </Drivers>
+    <Interfaces>
+        <Interface>
+            <Command>SPEED</Command>
+            <Drivers>
+                <Driver name="SPEED_DRIVER">
+                    <Params>
+                        <Param paramFrom="speed" paramTo="speed"/>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>FORWARD</Command>
+            <Drivers>
+                <Driver name="FORWARD_DRIVER">
+                    <Params>
+                        <Param paramFrom="speed" paramTo="speed"/>
+                    </Params>
+                </Driver>
+                <Driver name="STOP_DRIVER">
+                    <Params>
+                        <Param paramFrom="duration" paramTo="duration"/>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>BACKWARD</Command>
+            <Drivers>
+                <Driver name="BACKWARD_DRIVER">
+                    <Params>
+                        <Param paramFrom="speed" paramTo="speed"/>
+                    </Params>
+                </Driver>
+                <Driver name="STOP_DRIVER">
+                    <Params>
+                        <Param paramFrom="duration" paramTo="duration"/>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>MOVE</Command>
+            <Drivers>
+                <Driver name="TURN_DRIVER">
+                    <Params>
+                        <Param paramFrom="steering" paramTo="angle"/>
+                    </Params>
+                </Driver>
+                <Driver name="FORWARD_DRIVER">
+                    <Params>
+                        <Param paramFrom="speed" paramTo="speed"/>
+                    </Params>
+                </Driver>
+                <Driver name="STOP_DRIVER">
+                    <Params>
+                        <Param paramFrom="duration" paramTo="duration"/>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>STOP</Command>
+            <Drivers>
+                <Driver name="STOP_DRIVER">
+                    <Params>
+                        <Param paramFrom="duration" paramTo="duration"/>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>LEFT</Command>
+            <Drivers>
+                <Driver name="LEFT_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>STRAIGHT</Command>
+            <Drivers>
+                <Driver name="STRAIGHT_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>RIGHT</Command>
+            <Drivers>
+                <Driver name="RIGHT_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>TURN</Command>
+            <Drivers>
+                <Driver name="TURN_DRIVER">
+                    <Params>
+                        <Param paramFrom="steering" paramTo="angle"/>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>CAMERA_LEFT</Command>
+            <Drivers>
+                <Driver name="CAMERA_LEFT_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>CAMERA_RIGHT</Command>
+            <Drivers>
+                <Driver name="CAMERA_RIGHT_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>CAMERA_UP</Command>
+            <Drivers>
+                <Driver name="CAMERA_UP_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+        <Interface>
+            <Command>CAMERA_DOWN</Command>
+            <Drivers>
+                <Driver name="CAMERA_DOWN_DRIVER">
+                    <Params>
+                    </Params>
+                </Driver>
+            </Drivers>
+        </Interface>
+    </Interfaces>
+</Config>

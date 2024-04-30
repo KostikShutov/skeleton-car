@@ -1,16 +1,16 @@
 import logging
-from controllers.car.AngleService import AngleService
-from controllers.car.BackWheels import BackWheels
-from controllers.car.SpeedService import SpeedService
-from controllers.car.Camera import Camera
-from controllers.car.FrontWheels import FrontWheels
-from controllers.car.PCA9685 import PWM
-from controllers.car.Servo import Servo
-from controllers.car.TB6612 import Motor
-from controllers.car.Gps import Gps
-from controllers.ControllerInterface import ControllerInterface
+from car.service.SpeedService import speedService
+from car.BackWheels import BackWheels
+from car.Camera import Camera
+from car.FrontWheels import FrontWheels
+from car.PCA9685 import PWM
+from car.Servo import Servo
+from car.TB6612 import Motor
+from car.ControllerInterface import ControllerInterface
+from utils.Utils import microSleep, singleton
 
 
+@singleton
 class RemoteController(ControllerInterface):
     FRONT_OFFSET: int = -21
     CAMERA_PAN_OFFSET: int = -23
@@ -31,23 +31,9 @@ class RemoteController(ControllerInterface):
         logging.root.setLevel(logging.INFO)
         logging.basicConfig(format='%(asctime)s %(message)s')
 
-        self.angleService = AngleService()
-        self.speedService = SpeedService()
-        self.gps = Gps()
-
-        self.pwm = None
-        self.frontWheels = None
-        self.backWheels = None
-        self.camera = None
-
-    def init(self) -> None:
-        self.angleService.init()
-        self.speedService.init()
-
         self.pwm = PWM()
 
         self.frontWheels = FrontWheels(
-            angleService=self.angleService,
             servo=Servo(
                 pwm=self.pwm,
                 pwmChannel=self.FRONT_PWM_CHANNEL,
@@ -56,7 +42,6 @@ class RemoteController(ControllerInterface):
         )
 
         self.backWheels = BackWheels(
-            speedService=self.speedService,
             leftMotor=Motor(
                 pwm=self.pwm,
                 pwmChannel=self.BACK_LEFT_PWM_CHANNEL,
@@ -89,37 +74,27 @@ class RemoteController(ControllerInterface):
         self.camera.ready()
         self.pwm.setup()
 
-    def state(self) -> dict:
-        return {
-            'ok': True,
-            'minAngle': self.angleService.getMinAngle(),
-            'maxAngle': self.angleService.getMaxAngle(),
-            'currentAngle': self.angleService.getCurrentAngle(),
-            'minSpeed': self.speedService.getMinSpeed(),
-            'maxSpeed': self.speedService.getMaxSpeed(),
-            'currentSpeed': self.speedService.getCurrentSpeed(),
-            'latitude': self.gps.getLatitude(),
-            'longitude': self.gps.getLongitude(),
-        }
-
     def speed(self, speed: int) -> None:
-        self.speedService.setSpeed(speed)
+        speedService.setSpeed(speed)
 
     def forward(self, speed: int = None) -> None:
         if speed is not None:
-            self.speedService.setSpeed(speed)
+            speedService.setSpeed(speed)
 
-        self.backWheels.speed = self.speedService.getCurrentSpeed()
+        self.backWheels.speed = speedService.getCurrentSpeed()
         self.backWheels.forward()
 
     def backward(self, speed: int = None) -> None:
         if speed is not None:
-            self.speedService.setSpeed(speed)
+            speedService.setSpeed(speed)
 
-        self.backWheels.speed = self.speedService.getCurrentSpeed()
+        self.backWheels.speed = speedService.getCurrentSpeed()
         self.backWheels.backward()
 
-    def stop(self) -> None:
+    def stop(self, duration: float) -> None:
+        if duration > 0:
+            microSleep(duration)
+
         self.backWheels.stop()
 
     def left(self) -> None:

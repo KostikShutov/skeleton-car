@@ -1,10 +1,10 @@
-# skeleton-server
+# skeleton-car
 
 ## Другие компоненты общей системы
 
-[Webview for server](https://github.com/KostikShutov/skeleton-webview)
+[Webview for car control](https://github.com/KostikShutov/skeleton-webview)
 
-[Command generator](https://github.com/KostikShutov/skeleton-generator)
+[Autonomous command generator](https://github.com/KostikShutov/skeleton-autonomous)
 
 ## Docker
 

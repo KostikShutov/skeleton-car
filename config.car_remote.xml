@@ -1,5 +1,31 @@
 <?xml version="1.0"?>
 <Config>
+    <Algorithms>
+        <Algorith>
+            <Name>MANUAL</Name>
+            <Commands>
+                <Command>SPEED</Command>
+                <Command>FORWARD</Command>
+                <Command>BACKWARD</Command>
+                <Command>MOVE</Command>
+                <Command>STOP</Command>
+                <Command>LEFT</Command>
+                <Command>STRAIGHT</Command>
+                <Command>RIGHT</Command>
+                <Command>TURN</Command>
+                <Command>CAMERA_LEFT</Command>
+                <Command>CAMERA_RIGHT</Command>
+                <Command>CAMERA_UP</Command>
+                <Command>CAMERA_DOWN</Command>
+            </Commands>
+        </Algorith>
+        <Algorith>
+            <Name>AUTO</Name>
+            <Commands>
+                <Command>MOVE</Command>
+            </Commands>
+        </Algorith>
+    </Algorithms>
     <Commands>
         <Command>
             <Name>SPEED</Name>

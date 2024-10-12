@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Config>
     <Algorithms>
-        <Algorith>
+        <Algorithm>
             <Name>MANUAL</Name>
             <Commands>
                 <Command>SPEED</Command>
@@ -18,13 +18,13 @@
                 <Command>CAMERA_UP</Command>
                 <Command>CAMERA_DOWN</Command>
             </Commands>
-        </Algorith>
-        <Algorith>
+        </Algorithm>
+        <Algorithm>
             <Name>AUTO</Name>
             <Commands>
                 <Command>MOVE</Command>
             </Commands>
-        </Algorith>
+        </Algorithm>
     </Algorithms>
     <Commands>
         <Command>

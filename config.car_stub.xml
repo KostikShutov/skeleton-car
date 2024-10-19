@@ -106,78 +106,90 @@
     <Drivers>
         <Driver>
             <Name>SPEED_DRIVER</Name>
-            <Module>car.StubController/StubController/speed</Module>
+            <Module>car/StubController.py</Module>
+            <Method>speed</Method>
             <Params>
                 <Param name="speed"/>
             </Params>
         </Driver>
         <Driver>
             <Name>FORWARD_DRIVER</Name>
-            <Module>car.StubController/StubController/forward</Module>
+            <Module>car/StubController.py</Module>
+            <Method>forward</Method>
             <Params>
                 <Param name="speed"/>
             </Params>
         </Driver>
         <Driver>
             <Name>BACKWARD_DRIVER</Name>
-            <Module>car.StubController/StubController/backward</Module>
+            <Module>car/StubController.py</Module>
+            <Method>backward</Method>
             <Params>
                 <Param name="speed"/>
             </Params>
         </Driver>
         <Driver>
             <Name>STOP_DRIVER</Name>
-            <Module>car.StubController/StubController/stop</Module>
+            <Module>car/StubController.py</Module>
+            <Method>stop</Method>
             <Params>
                 <Param name="duration"/>
             </Params>
         </Driver>
         <Driver>
             <Name>LEFT_DRIVER</Name>
-            <Module>car.StubController/StubController/left</Module>
+            <Module>car/StubController.py</Module>
+            <Method>left</Method>
             <Params>
             </Params>
         </Driver>
         <Driver>
             <Name>STRAIGHT_DRIVER</Name>
-            <Module>car.StubController/StubController/straight</Module>
+            <Module>car/StubController.py</Module>
+            <Method>straight</Method>
             <Params>
             </Params>
         </Driver>
         <Driver>
             <Name>RIGHT_DRIVER</Name>
-            <Module>car.StubController/StubController/right</Module>
+            <Module>car/StubController.py</Module>
+            <Method>right</Method>
             <Params>
             </Params>
         </Driver>
         <Driver>
             <Name>TURN_DRIVER</Name>
-            <Module>car.StubController/StubController/turn</Module>
+            <Module>car/StubController.py</Module>
+            <Method>turn</Method>
             <Params>
                 <Param name="angle"/>
             </Params>
         </Driver>
         <Driver>
             <Name>CAMERA_LEFT_DRIVER</Name>
-            <Module>car.StubController/StubController/cameraLeft</Module>
+            <Module>car/StubController.py</Module>
+            <Method>cameraLeft</Method>
             <Params>
             </Params>
         </Driver>
         <Driver>
             <Name>CAMERA_RIGHT_DRIVER</Name>
-            <Module>car.StubController/StubController/cameraRight</Module>
+            <Module>car/StubController.py</Module>
+            <Method>cameraRight</Method>
             <Params>
             </Params>
         </Driver>
         <Driver>
             <Name>CAMERA_UP_DRIVER</Name>
-            <Module>car.StubController/StubController/cameraUp</Module>
+            <Module>car/StubController.py</Module>
+            <Method>cameraUp</Method>
             <Params>
             </Params>
         </Driver>
         <Driver>
             <Name>CAMERA_DOWN_DRIVER</Name>
-            <Module>car.StubController/StubController/cameraDown</Module>
+            <Module>car/StubController.py</Module>
+            <Method>cameraDown</Method>
             <Params>
             </Params>
         </Driver>

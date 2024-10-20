@@ -11,7 +11,8 @@ class _SpeedService:
             self.setSpeed(self.INIT_SPEED)
 
     def getCurrentSpeed(self) -> int:
-        return int(redis.get('currentSpeed').decode('utf-8'))
+        # Todo: remove cast to int, change to float everywhere
+        return round(float(redis.get('currentSpeed').decode('utf-8')))
 
     def getMinSpeed(self) -> int:
         return self.MIN_SPEED

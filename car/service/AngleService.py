@@ -11,7 +11,8 @@ class _AngleService:
             self.setAngle(self.INIT_ANGLE)
 
     def getCurrentAngle(self, withCast: bool = False) -> int:
-        angle: int = int(redis.get('currentAngle').decode('utf-8'))
+        # Todo: remove cast to int, change to float everywhere
+        angle: int = round(float(redis.get('currentAngle').decode('utf-8')))
 
         if withCast:
             angle += 90

@@ -63,18 +63,15 @@
         </Command>
         <Command>
             <Name>LEFT</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
         <Command>
             <Name>STRAIGHT</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
         <Command>
             <Name>RIGHT</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
         <Command>
             <Name>TURN</Name>
@@ -84,23 +81,19 @@
         </Command>
         <Command>
             <Name>CAMERA_LEFT</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
         <Command>
             <Name>CAMERA_RIGHT</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
         <Command>
             <Name>CAMERA_UP</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
         <Command>
             <Name>CAMERA_DOWN</Name>
-            <Params>
-            </Params>
+            <Params/>
         </Command>
     </Commands>
     <Drivers>
@@ -140,22 +133,19 @@
             <Name>LEFT_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>left</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
         <Driver>
             <Name>STRAIGHT_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>straight</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
         <Driver>
             <Name>RIGHT_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>right</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
         <Driver>
             <Name>TURN_DRIVER</Name>
@@ -169,29 +159,25 @@
             <Name>CAMERA_LEFT_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>cameraLeft</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
         <Driver>
             <Name>CAMERA_RIGHT_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>cameraRight</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
         <Driver>
             <Name>CAMERA_UP_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>cameraUp</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
         <Driver>
             <Name>CAMERA_DOWN_DRIVER</Name>
             <Module>car/StubController.py</Module>
             <Method>cameraDown</Method>
-            <Params>
-            </Params>
+            <Params/>
         </Driver>
     </Drivers>
     <Interfaces>
@@ -269,8 +255,7 @@
             <Command>LEFT</Command>
             <Drivers>
                 <Driver name="LEFT_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>
@@ -278,8 +263,7 @@
             <Command>STRAIGHT</Command>
             <Drivers>
                 <Driver name="STRAIGHT_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>
@@ -287,8 +271,7 @@
             <Command>RIGHT</Command>
             <Drivers>
                 <Driver name="RIGHT_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>
@@ -306,8 +289,7 @@
             <Command>CAMERA_LEFT</Command>
             <Drivers>
                 <Driver name="CAMERA_LEFT_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>
@@ -315,8 +297,7 @@
             <Command>CAMERA_RIGHT</Command>
             <Drivers>
                 <Driver name="CAMERA_RIGHT_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>
@@ -324,8 +305,7 @@
             <Command>CAMERA_UP</Command>
             <Drivers>
                 <Driver name="CAMERA_UP_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>
@@ -333,8 +313,7 @@
             <Command>CAMERA_DOWN</Command>
             <Drivers>
                 <Driver name="CAMERA_DOWN_DRIVER">
-                    <Params>
-                    </Params>
+                    <Params/>
                 </Driver>
             </Drivers>
         </Interface>

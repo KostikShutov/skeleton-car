@@ -4,6 +4,7 @@ import json
 import eventlet
 import socketio
 from car.service.StateService import stateService
+from car.service.OverrideService import overrideService
 from executor.CommandCoordinator import CommandCoordinator
 from utils.Env import env
 
@@ -59,6 +60,17 @@ def statusCommand(sid: str, commandId: str) -> str:
 @sio.event
 def purgeCommands(sid: str) -> None:
     commandCoordinator.purgeCommands()
+
+
+@sio.event
+def getConfig(sid: str) -> str:
+    with open(overrideService.getConfig(), 'r', encoding='utf-8') as file:
+        return json.dumps({'xml': file.read()})
+
+
+@sio.event
+def uploadConfig(sid: str, payload: object) -> None:
+    overrideService.uploadConfig(payload['xml'])
 
 
 if __name__ == '__main__':

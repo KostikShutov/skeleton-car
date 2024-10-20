@@ -1,10 +1,11 @@
 import logging
 from skeleton_xml.ConfigService import ConfigService
+from car.service.OverrideService import overrideService
 
 
 class CommandExecutor:
-    def __init__(self, config: str) -> None:
-        self.configService: ConfigService = ConfigService(config=config)
+    def __init__(self) -> None:
+        self.configService: ConfigService = ConfigService(config=overrideService.getConfig())
 
     def execute(self, payload: dict) -> None:
         logging.info('Received command: %s' % payload)

@@ -7,7 +7,6 @@ from executor.celery import app
 from utils.Env import env
 
 sio = socketio.RedisManager('redis://%s:%s' % (env['REDIS_HOST'], env['REDIS_PORT']), write_only=True)
-commandExecutor: CommandExecutor = CommandExecutor(config=env['CONFIG'])
 
 
 @app.task
@@ -16,7 +15,7 @@ def commandTask(body: str) -> None:
     commandId: str = current_task.request.id
 
     try:
-        commandExecutor.execute(payload)
+        CommandExecutor().execute(payload)
         sio.emit('getCommand', data=json.dumps({
             'id': commandId,
             'status': 'success',

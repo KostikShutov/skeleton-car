@@ -4,7 +4,7 @@ import json
 import eventlet
 import socketio
 from car.service.StateService import stateService
-from car.service.OverrideService import overrideService
+from config.OverrideService import overrideService
 from executor.CommandCoordinator import CommandCoordinator
 from utils.Env import env
 

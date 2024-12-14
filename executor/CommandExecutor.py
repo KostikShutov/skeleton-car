@@ -1,6 +1,6 @@
 import logging
 from skeleton_xml.ConfigService import ConfigService
-from car.service.OverrideService import overrideService
+from config.OverrideService import overrideService
 
 
 class CommandExecutor:

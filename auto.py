@@ -6,11 +6,10 @@ from skeleton_xml.ConfigService import ConfigService
 from config.OverrideService import overrideService
 from utils.DeadHand import isDead
 
-configService: ConfigService = ConfigService(config=overrideService.getConfig())
-
 while True:
     if isDead():
         logging.info('Executed auto algorithm')
-        configService.executeAlgorithm(algorithmName='AUTO')
+        config: str = overrideService.getConfig()
+        ConfigService(config=config).executeAlgorithm(algorithmName='AUTO')
 
     time.sleep(1)

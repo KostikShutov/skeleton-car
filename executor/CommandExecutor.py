@@ -9,6 +9,5 @@ class CommandExecutor:
 
     def execute(self, payload: dict) -> None:
         logging.info('Received command: %s' % payload)
-        algorithmName: str = payload.pop('algorithmName')
         commandName: str = payload.pop('commandName')
-        self.configService.execute(algorithmName=algorithmName, commandName=commandName, request=payload)
+        self.configService.executeCommand(commandName=commandName, request=payload)

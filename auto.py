@@ -4,10 +4,12 @@ import time
 import logging
 from skeleton_xml.ConfigService import ConfigService
 from config.OverrideService import overrideService
+from executor.CommandCoordinator import CommandCoordinator
 from utils.DeadHand import isDead
 from utils.Logger import configureLogger
 
 configureLogger()
+commandCoordinator: CommandCoordinator = CommandCoordinator()
 
 while True:
     if isDead():
@@ -15,7 +17,8 @@ while True:
 
         try:
             config: str = overrideService.getConfig()
-            ConfigService(config=config).executeAlgorithm(algorithmName='AUTO')
+            payloads: list[dict] = ConfigService(config=config).executeAlgorithm(algorithmName='AUTO')
+            commandCoordinator.pushCommands(payloads)
         except Exception as e:
             logging.error('Failed to execute auto algorithm: ', e)
 

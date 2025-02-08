@@ -1,13 +1,7 @@
-from executor.CommandCoordinator import CommandCoordinator
-
-
 class StubAutoAlgorithm:
-    def __init__(self) -> None:
-        self.commandCoordinator: CommandCoordinator = CommandCoordinator()
-
-    def execute(self) -> None:
-        self.commandCoordinator.pushCommand({
+    def execute(self) -> list[dict]:
+        return [{
             'commandName': 'FORWARD',
             'speed': 60,
             'duration': 1.0,
-        })
+        }]

@@ -6,7 +6,7 @@ from utils.Utils import microSleep, singleton
 
 
 @singleton
-class StubController(ControllerInterface):
+class StubRemoteController(ControllerInterface):
     def speed(self, speed: int) -> None:
         speedService.setSpeed(speed)
         logging.info('Speed (speed: %s)' % speed)

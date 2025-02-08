@@ -2,28 +2,9 @@
 <Config>
     <Algorithms>
         <Algorithm>
-            <Name>MANUAL</Name>
-            <Commands>
-                <Command>SPEED</Command>
-                <Command>FORWARD</Command>
-                <Command>BACKWARD</Command>
-                <Command>MOVE</Command>
-                <Command>STOP</Command>
-                <Command>LEFT</Command>
-                <Command>STRAIGHT</Command>
-                <Command>RIGHT</Command>
-                <Command>TURN</Command>
-                <Command>CAMERA_LEFT</Command>
-                <Command>CAMERA_RIGHT</Command>
-                <Command>CAMERA_UP</Command>
-                <Command>CAMERA_DOWN</Command>
-            </Commands>
-        </Algorithm>
-        <Algorithm>
             <Name>AUTO</Name>
-            <Commands>
-                <Command>MOVE</Command>
-            </Commands>
+            <Module>car/AutoAlgorithm.py</Module>
+            <Method>execute</Method>
         </Algorithm>
     </Algorithms>
     <Commands>

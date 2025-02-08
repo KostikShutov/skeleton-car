@@ -2,28 +2,9 @@
 <Config>
     <Algorithms>
         <Algorithm>
-            <Name>MANUAL</Name>
-            <Commands>
-                <Command>SPEED</Command>
-                <Command>FORWARD</Command>
-                <Command>BACKWARD</Command>
-                <Command>MOVE</Command>
-                <Command>STOP</Command>
-                <Command>LEFT</Command>
-                <Command>STRAIGHT</Command>
-                <Command>RIGHT</Command>
-                <Command>TURN</Command>
-                <Command>CAMERA_LEFT</Command>
-                <Command>CAMERA_RIGHT</Command>
-                <Command>CAMERA_UP</Command>
-                <Command>CAMERA_DOWN</Command>
-            </Commands>
-        </Algorithm>
-        <Algorithm>
             <Name>AUTO</Name>
-            <Commands>
-                <Command>MOVE</Command>
-            </Commands>
+            <Module>car/StubAutoAlgorithm.py</Module>
+            <Method>execute</Method>
         </Algorithm>
     </Algorithms>
     <Commands>
@@ -99,7 +80,7 @@
     <Drivers>
         <Driver>
             <Name>SPEED_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>speed</Method>
             <Params>
                 <Param name="speed"/>
@@ -107,7 +88,7 @@
         </Driver>
         <Driver>
             <Name>FORWARD_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>forward</Method>
             <Params>
                 <Param name="speed"/>
@@ -115,7 +96,7 @@
         </Driver>
         <Driver>
             <Name>BACKWARD_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>backward</Method>
             <Params>
                 <Param name="speed"/>
@@ -123,7 +104,7 @@
         </Driver>
         <Driver>
             <Name>STOP_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>stop</Method>
             <Params>
                 <Param name="duration"/>
@@ -131,25 +112,25 @@
         </Driver>
         <Driver>
             <Name>LEFT_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>left</Method>
             <Params/>
         </Driver>
         <Driver>
             <Name>STRAIGHT_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>straight</Method>
             <Params/>
         </Driver>
         <Driver>
             <Name>RIGHT_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>right</Method>
             <Params/>
         </Driver>
         <Driver>
             <Name>TURN_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>turn</Method>
             <Params>
                 <Param name="angle"/>
@@ -157,25 +138,25 @@
         </Driver>
         <Driver>
             <Name>CAMERA_LEFT_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>cameraLeft</Method>
             <Params/>
         </Driver>
         <Driver>
             <Name>CAMERA_RIGHT_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>cameraRight</Method>
             <Params/>
         </Driver>
         <Driver>
             <Name>CAMERA_UP_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>cameraUp</Method>
             <Params/>
         </Driver>
         <Driver>
             <Name>CAMERA_DOWN_DRIVER</Name>
-            <Module>car/StubController.py</Module>
+            <Module>car/StubRemoteController.py</Module>
             <Method>cameraDown</Method>
             <Params/>
         </Driver>

@@ -5,8 +5,7 @@ from skeleton_xml.ConfigService import ConfigService
 
 class ValidateConfigsTest(unittest.TestCase):
     def testValidateCarRemoteConfig(self) -> None:
-        self.__createConfigService('../config.car_remote.xml').validate(
-            algorithmName='MANUAL',
+        self.__createConfigService('../config.car_remote.xml').validateAndGetDrivers(
             commandName='FORWARD',
             request={
                 'speed': 60,
@@ -15,8 +14,7 @@ class ValidateConfigsTest(unittest.TestCase):
         )
 
     def testValidateCarStubConfig(self) -> None:
-        self.__createConfigService('../config.car_stub.xml').validate(
-            algorithmName='MANUAL',
+        self.__createConfigService('../config.car_stub.xml').validateAndGetDrivers(
             commandName='FORWARD',
             request={
                 'speed': 60,

@@ -9,7 +9,11 @@ from utils.DeadHand import isDead
 while True:
     if isDead():
         logging.info('Executed auto algorithm')
-        config: str = overrideService.getConfig()
-        ConfigService(config=config).executeAlgorithm(algorithmName='AUTO')
+
+        try:
+            config: str = overrideService.getConfig()
+            ConfigService(config=config).executeAlgorithm(algorithmName='AUTO')
+        except Exception:
+            pass
 
     time.sleep(1)

@@ -1,13 +1,9 @@
 import json
 from executor.celery import app
 from executor.tasks import commandTask
-from socketio import RedisManager as SocketManager
 
 
 class CommandCoordinator:
-    def __init__(self, socketManager: SocketManager) -> None:
-        self.socketManager = socketManager
-
     def pushCommands(self, payloads: list[object]) -> list[str]:
         tasks: list[str] = []
 
@@ -25,7 +21,6 @@ class CommandCoordinator:
 
     def revokeCommand(self, commandId: str) -> None:
         app.control.revoke(commandId, terminate=True)
-        self.socketManager.emit('getCommand', json.dumps({'id': commandId, 'status': 'cancelled'}))
 
     def getCommandStatus(self, commandId: str) -> str:
         return app.AsyncResult(commandId).state

@@ -26,6 +26,10 @@ d-python:
 server:
 	docker compose run --rm -p 2001:5000 -w /code python-picar python server.py
 
+.PHONY: auto
+auto:
+	docker compose run --rm -w /code python-picar python auto.py
+
 .PHONY: worker
 worker:
 	docker compose run --rm -w /code python-picar python -m celery -A executor worker --concurrency=1 -l INFO

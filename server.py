@@ -5,7 +5,7 @@ import eventlet
 import socketio
 from car.service.StateService import stateService
 from config.OverrideService import overrideService
-from executor.CommandCoordinator import CommandCoordinator
+from executor.DeadHandCommandCoordinator import DeadHandCommandCoordinator
 from utils.Env import env
 
 eventlet.monkey_patch()
@@ -13,7 +13,7 @@ mgr = socketio.RedisManager('redis://%s:%s' % (env['REDIS_HOST'], env['REDIS_POR
 sio = socketio.Server(cors_allowed_origins='*', client_manager=mgr)
 app = socketio.WSGIApp(sio)
 configToken: str = env['TOKEN']
-commandCoordinator: CommandCoordinator = CommandCoordinator(socketManager=mgr)
+commandCoordinator: DeadHandCommandCoordinator = DeadHandCommandCoordinator()
 
 
 @sio.event
@@ -50,6 +50,7 @@ def pushCommand(sid: str, payload: object) -> str:
 @sio.event
 def revokeCommand(sid: str, commandId: str) -> None:
     commandCoordinator.revokeCommand(commandId)
+    mgr.emit('getCommand', json.dumps({'id': commandId, 'status': 'cancelled'}))
 
 
 @sio.event

@@ -3,8 +3,9 @@
 import json
 import eventlet
 import socketio
-from car.service.StateService import stateService
+from car.StateService import stateService
 from config.OverrideService import overrideService
+from config.FileService import fileService
 from executor.DeadHandCommandCoordinator import DeadHandCommandCoordinator
 from utils.Env import env
 
@@ -72,6 +73,26 @@ def getConfig(sid: str) -> str:
 @sio.event
 def uploadConfig(sid: str, payload: object) -> None:
     overrideService.uploadConfig(payload['xml'])
+
+
+@sio.event
+def uploadFile(sid: str, payload: object) -> None:
+    fileService.uploadFile(payload)
+
+
+@sio.event
+def downloadFile(sid: str, filename: str) -> bytes | None:
+    return fileService.downloadFile(filename)
+
+
+@sio.event
+def getFiles(sid: str) -> list[str]:
+    return fileService.getFiles()
+
+
+@sio.event
+def deleteFile(sid: str, filename: str) -> None:
+    fileService.deleteFile(filename)
 
 
 if __name__ == '__main__':

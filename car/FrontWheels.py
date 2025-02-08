@@ -1,6 +1,6 @@
 import logging
 import car.Servo as Servo
-from car.service.AngleService import angleService
+from car.AngleService import angleService
 
 
 class FrontWheels(object):

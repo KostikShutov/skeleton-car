@@ -1,7 +1,7 @@
 import json
 import socketio
 from celery import current_task
-from car.service.StateService import stateService
+from car.StateService import stateService
 from executor.CommandExecutor import CommandExecutor
 from executor.celery import app
 from utils.Env import env

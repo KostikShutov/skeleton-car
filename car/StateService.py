@@ -1,6 +1,6 @@
-from car.service.AngleService import angleService
-from car.service.SpeedService import speedService
-from car.service.GpsService import gpsService
+from car.AngleService import angleService
+from car.SpeedService import speedService
+from car.GpsService import gpsService
 
 
 class _StateService:

@@ -1,5 +1,5 @@
 import logging
-from car.service.SpeedService import speedService
+from car.SpeedService import speedService
 from car.BackWheels import BackWheels
 from car.Camera import Camera
 from car.FrontWheels import FrontWheels

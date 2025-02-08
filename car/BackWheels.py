@@ -1,6 +1,6 @@
 import logging
 import car.TB6612 as TB6612
-from car.service.SpeedService import speedService
+from car.SpeedService import speedService
 
 
 class BackWheels(object):

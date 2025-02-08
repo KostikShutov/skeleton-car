@@ -1,6 +1,6 @@
 import logging
-from car.service.AngleService import angleService
-from car.service.SpeedService import speedService
+from car.AngleService import angleService
+from car.SpeedService import speedService
 from car.ControllerInterface import ControllerInterface
 from utils.Utils import microSleep, singleton
 

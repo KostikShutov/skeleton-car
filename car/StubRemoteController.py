@@ -7,6 +7,9 @@ from utils.Utils import microSleep, singleton
 
 @singleton
 class StubRemoteController(ControllerInterface):
+    def __init__(self, entry: dict) -> None:
+        self.entry: dict = entry
+
     def speed(self, speed: int) -> None:
         speedService.setSpeed(speed)
         logging.info('Speed (speed: %s)' % speed)

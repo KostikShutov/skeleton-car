@@ -27,7 +27,9 @@ class RemoteController(ControllerInterface):
     BACK_LEFT_DIRECTION_CHANNEL: int = 17
     BACK_RIGHT_DIRECTION_CHANNEL: int = 27
 
-    def __init__(self) -> None:
+    def __init__(self, entry: dict) -> None:
+        self.entry: dict = entry
+
         logging.root.setLevel(logging.INFO)
         logging.basicConfig(format='%(asctime)s %(message)s')
 

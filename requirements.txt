@@ -6,4 +6,5 @@ python-dotenv==1.0.1
 celery==5.4.0
 redis==5.2.1
 gpsd-py3==0.3.0
+opencv-python==4.11.0.86
 skeleton-xml @ git+https://github.com/KostikShutov/skeleton-xml@main

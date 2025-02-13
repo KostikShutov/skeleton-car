@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install gcc git -y \
+    && apt-get install gcc git ffmpeg libsm6 libxext6 -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

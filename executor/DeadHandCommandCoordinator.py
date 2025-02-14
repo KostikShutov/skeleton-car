@@ -1,10 +1,12 @@
+from socketio import RedisManager
 from executor.CommandCoordinator import CommandCoordinator
 from utils.DeadHand import iAmAlive
 
 
 class DeadHandCommandCoordinator(CommandCoordinator):
-    def __init__(self) -> None:
+    def __init__(self, sio: RedisManager | None = None):
         iAmAlive()
+        super().__init__(sio)
 
     def pushCommands(self, payloads: list[object]) -> list[str]:
         iAmAlive()

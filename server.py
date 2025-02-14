@@ -14,7 +14,7 @@ mgr = socketio.RedisManager('redis://%s:%s' % (env['REDIS_HOST'], env['REDIS_POR
 sio = socketio.Server(cors_allowed_origins='*', client_manager=mgr)
 app = socketio.WSGIApp(sio)
 configToken: str = env['TOKEN']
-commandCoordinator: DeadHandCommandCoordinator = DeadHandCommandCoordinator()
+commandCoordinator: DeadHandCommandCoordinator = DeadHandCommandCoordinator(sio=mgr)
 
 
 @sio.event
@@ -51,7 +51,6 @@ def pushCommand(sid: str, payload: object) -> str:
 @sio.event
 def revokeCommand(sid: str, commandId: str) -> None:
     commandCoordinator.revokeCommand(commandId)
-    mgr.emit('getCommand', json.dumps({'id': commandId, 'status': 'cancelled'}))
 
 
 @sio.event

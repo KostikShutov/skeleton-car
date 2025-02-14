@@ -39,13 +39,13 @@ def state(sid: str) -> str:
 
 
 @sio.event
-def pushCommands(sid: str, payloads: list) -> str:
-    return json.dumps(commandCoordinator.pushCommands(payloads))
+def pushCommands(sid: str, payloads: list, algorithmName: str) -> str:
+    return json.dumps(commandCoordinator.pushCommands(payloads, algorithmName))
 
 
 @sio.event
-def pushCommand(sid: str, payload: object) -> str:
-    return str(commandCoordinator.pushCommand(payload))
+def pushCommand(sid: str, payload: object, algorithmName: str) -> str:
+    return str(commandCoordinator.pushCommand(payload, algorithmName))
 
 
 @sio.event

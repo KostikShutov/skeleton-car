@@ -2,7 +2,7 @@ import logging
 import car.Servo as Servo
 
 
-class Camera(object):
+class CameraMover(object):
     READY_PAN: int = 90  # Ready position angle
     READY_TILT: int = 90  # Ready position angle
     CALI_PAN: int = 90  # Calibration position angle

@@ -4,19 +4,19 @@ from utils.DeadHand import iAmAlive
 
 
 class DeadHandCommandCoordinator(CommandCoordinator):
-    def __init__(self, sio: RedisManager | None = None):
+    def __init__(self, sio: RedisManager):
         iAmAlive()
         super().__init__(sio)
 
-    def pushCommands(self, payloads: list[object]) -> list[str]:
+    def pushCommands(self, payloads: list[object], algorithmName: str) -> list[str]:
         iAmAlive()
 
-        return super().pushCommands(payloads)
+        return super().pushCommands(payloads, algorithmName)
 
-    def pushCommand(self, payload: object) -> str:
+    def pushCommand(self, payload: object, algorithmName: str) -> str:
         iAmAlive()
 
-        return super().pushCommand(payload)
+        return super().pushCommand(payload, algorithmName)
 
     def revokeCommand(self, commandId: str) -> None:
         iAmAlive()

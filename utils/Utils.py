@@ -1,4 +1,5 @@
 import time
+from typing import TypeVar, Type, Dict, Callable
 
 
 def microSleep(duration: float) -> None:
@@ -8,8 +9,11 @@ def microSleep(duration: float) -> None:
         pass
 
 
-def singleton(class_) -> object:
-    instances: dict[str, object] = {}
+T = TypeVar('T')
+
+
+def singleton(class_: Type[T]) -> Callable[..., T]:
+    instances: Dict[Type[T], T] = {}
 
     def getinstance(*args, **kwargs) -> object:
         if class_ not in instances:

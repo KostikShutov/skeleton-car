@@ -5,43 +5,54 @@ from executor.tasks import commandTask
 
 
 class CommandCoordinator:
-    def __init__(self, sio: RedisManager | None = None):
+    def __init__(self, sio: RedisManager):
         self.sio: RedisManager = sio
 
-    def pushCommands(self, payloads: list[object]) -> list[str]:
+    def pushCommands(self, payloads: list[object], algorithmName: str) -> list[str]:
         tasks: list[str] = []
 
         for payload in payloads:
-            task: str = self.pushCommand(payload)
+            task: str = self.pushCommand(payload, algorithmName)
             tasks.append(task)
 
         return tasks
 
-    def pushCommand(self, payload: object) -> str:
+    def pushCommand(self, payload: object, algorithmName: str) -> str:
         body: str = json.dumps(payload)
         result = commandTask.delay(body=body)
+        commandId: str = result.task_id
+        self.sio.emit('addCommand', data=json.dumps({
+            'id': commandId,
+            'status': 'received',
+            'algorithmName': algorithmName,
+            'commandName': payload['commandName'],
+        }))
 
-        return result.task_id
+        return commandId
 
     def revokeCommand(self, commandId: str) -> None:
         app.control.revoke(commandId, terminate=True)
-
-        if self.sio is not None:
-            self.sio.emit('getCommand', data=json.dumps({
-                'id': commandId,
-                'status': 'cancelled',
-            }))
+        self.sio.emit('updateCommand', data=json.dumps({
+            'id': commandId,
+            'status': 'revoked',
+        }))
 
     def getCommandStatus(self, commandId: str) -> str:
         return app.AsyncResult(commandId).state
 
     def purgeCommands(self) -> None:
-        app.control.purge()  # Remove pending tasks
         i = app.control.inspect()
-        self.__revokeJobs(i.active())  # Remove active tasks
-        self.__revokeJobs(i.reserved())  # Remove reserved tasks
+        self.__revokeJobs(i.active())
+        self.__revokeJobs(i.scheduled())
+        self.__revokeJobs(i.reserved())
+        self.__revokeJobs(i.registered())
+        app.control.purge()
+        self.sio.emit('purgeCommands', data=json.dumps({}))
 
-    def __revokeJobs(self, jobs: list) -> None:
+    def __revokeJobs(self, jobs: list | None) -> None:
+        if jobs is None:
+            return
+
         for hostname in jobs:
             tasks = jobs[hostname]
 

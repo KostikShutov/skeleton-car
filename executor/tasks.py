@@ -2,7 +2,6 @@ import json
 import socketio
 import logging
 from celery import current_task
-from car.StateService import stateService
 from executor.celery import app
 from utils.Env import env
 from skeleton_xml.ConfigService import ConfigService
@@ -20,15 +19,18 @@ def commandTask(body: str) -> None:
 
     try:
         config: str = overrideService.getConfig()
-        ConfigService(config=config).executeCommand(commandName=commandName, request=payload)
-        sio.emit('getCommand', data=json.dumps({
+        sio.emit('updateCommand', data=json.dumps({
             'id': commandId,
-            'status': 'success',
-            'state': stateService.state(),
+            'status': 'started',
         }))
-    except Exception:
-        sio.emit('getCommand', data=json.dumps({
+        ConfigService(config=config).executeCommand(commandName=commandName, request=payload)
+        sio.emit('updateCommand', data=json.dumps({
             'id': commandId,
-            'status': 'error',
-            'state': stateService.state(),
+            'status': 'succeeded',
+        }))
+    except Exception as e:
+        logging.error('Failed to execute command: %s' % e)
+        sio.emit('updateCommand', data=json.dumps({
+            'id': commandId,
+            'status': 'failed',
         }))

@@ -1,6 +1,7 @@
 import cv2
 import time
 import numpy as np
+from car.CameraCapturer import CameraCapturer
 
 
 class AutoAlgorithm:
@@ -8,19 +9,22 @@ class AutoAlgorithm:
         self.entry: dict = entry
 
     def execute(self) -> list[dict]:
-        cap = self.entry['cap']
-        ret, frame = cap.read()
+        ret, originalFrame = CameraCapturer().cap.read()
 
         if not ret:
-            return []
+            CameraCapturer().release()
+            cv2.destroyAllWindows()
+            time.sleep(1)
+            CameraCapturer().init()
 
-        angle, processedFrame = self.doExecute(frame)
+            raise RuntimeError('Camera problem')
 
-        cv2.imshow('Original frame', frame)
-        cv2.imshow('Processed frame', processedFrame)
+        angle, processedFrame = self.doExecute(originalFrame)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            return []
+        if self.entry['needShowFrames']:
+            cv2.imshow('Original frame', originalFrame)
+            cv2.imshow('Processed frame', processedFrame)
+            cv2.waitKey(1)
 
         lastTime: float | None = self.entry['lastTime']
 

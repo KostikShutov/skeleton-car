@@ -1,7 +1,7 @@
 import logging
 from car.SpeedService import speedService
 from car.BackWheels import BackWheels
-from car.Camera import Camera
+from car.CameraMover import CameraMover
 from car.FrontWheels import FrontWheels
 from car.PCA9685 import PWM
 from car.Servo import Servo
@@ -58,7 +58,7 @@ class RemoteController(ControllerInterface):
             ),
         )
 
-        self.camera = Camera(
+        self.cameraMover = CameraMover(
             panServo=Servo(
                 pwm=self.pwm,
                 pwmChannel=self.CAMERA_PAN_PWM_CHANNEL,
@@ -73,7 +73,7 @@ class RemoteController(ControllerInterface):
 
         self.frontWheels.ready()
         self.backWheels.ready()
-        self.camera.ready()
+        self.cameraMover.ready()
         self.pwm.setup()
 
     def speed(self, speed: int) -> None:
@@ -112,13 +112,13 @@ class RemoteController(ControllerInterface):
         self.frontWheels.turn(angle)
 
     def cameraLeft(self) -> None:
-        self.camera.turnLeft(40)
+        self.cameraMover.turnLeft(40)
 
     def cameraRight(self) -> None:
-        self.camera.turnRight(40)
+        self.cameraMover.turnRight(40)
 
     def cameraUp(self) -> None:
-        self.camera.turnUp(20)
+        self.cameraMover.turnUp(20)
 
     def cameraDown(self) -> None:
-        self.camera.turnDown(20)
+        self.cameraMover.turnDown(20)

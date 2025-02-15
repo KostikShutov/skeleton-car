@@ -1,5 +1,6 @@
 import os
 import base64
+from typing import Optional
 
 
 class _FileService:
@@ -13,7 +14,7 @@ class _FileService:
         with open(path, 'wb') as file:
             file.write(data)
 
-    def downloadFile(self, name: str) -> bytes | None:
+    def downloadFile(self, name: str) -> Optional[bytes]:
         path: str = os.path.join(self.DIR, name)
 
         if os.path.exists(path):

@@ -3,6 +3,7 @@
 import json
 import eventlet
 import socketio
+from typing import Optional
 from car.StateService import stateService
 from config.OverrideService import overrideService
 from config.FileService import fileService
@@ -80,7 +81,7 @@ def uploadFile(sid: str, payload: object) -> None:
 
 
 @sio.event
-def downloadFile(sid: str, filename: str) -> bytes | None:
+def downloadFile(sid: str, filename: str) -> Optional[bytes]:
     return fileService.downloadFile(filename)
 
 

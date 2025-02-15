@@ -1,6 +1,7 @@
 import cv2
 import time
 import numpy as np
+from typing import Optional
 from car.CameraCapturer import CameraCapturer
 
 
@@ -26,7 +27,7 @@ class AutoAlgorithm:
             cv2.imshow('Processed frame', processedFrame)
             cv2.waitKey(1)
 
-        lastTime: float | None = self.entry['lastTime']
+        lastTime: Optional[float] = self.entry['lastTime']
 
         if lastTime is not None and time.time() - lastTime < 1:
             return []

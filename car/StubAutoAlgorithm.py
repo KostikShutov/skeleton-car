@@ -1,4 +1,5 @@
 import time
+from typing import Optional
 
 
 class StubAutoAlgorithm:
@@ -6,7 +7,7 @@ class StubAutoAlgorithm:
         self.entry: dict = entry
 
     def execute(self) -> list[dict]:
-        lastTime: float | None = self.entry['lastTime']
+        lastTime: Optional[float] = self.entry['lastTime']
 
         if lastTime is not None and time.time() - lastTime < 1:
             return []

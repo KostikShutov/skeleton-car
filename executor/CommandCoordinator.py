@@ -1,4 +1,5 @@
 import json
+from typing import Optional
 from socketio import RedisManager
 from executor.celery import app
 from executor.tasks import commandTask
@@ -49,7 +50,7 @@ class CommandCoordinator:
         app.control.purge()
         self.sio.emit('purgeCommands', data=json.dumps({}))
 
-    def __revokeJobs(self, jobs: list | None) -> None:
+    def __revokeJobs(self, jobs: Optional[list]) -> None:
         if jobs is None:
             return
 

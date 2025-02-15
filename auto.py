@@ -3,6 +3,7 @@
 import time
 import logging
 import socketio
+from typing import Optional
 from skeleton_xml.ConfigService import ConfigService
 from config.OverrideService import overrideService
 from executor.CommandCoordinator import CommandCoordinator
@@ -13,7 +14,7 @@ from utils.Logger import configureLogger
 configureLogger()
 sio = socketio.RedisManager('redis://%s:%s' % (env['REDIS_HOST'], env['REDIS_PORT']), write_only=True)
 commandCoordinator: CommandCoordinator = CommandCoordinator(sio=sio)
-lastTime: float | None = None
+lastTime: Optional[float] = None
 
 while True:
     if isDead():

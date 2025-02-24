@@ -54,17 +54,22 @@ class AutoAlgorithm:
     def doExecute(self, frame):
         height, width, _ = frame.shape
 
-        # Преобразование в оттенки серого
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # Преобразование в HSV
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        # Размытие для уменьшения шума
-        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+        # Определение границ красного цвета
+        lower_red1 = np.array([0, 120, 70])
+        upper_red1 = np.array([10, 255, 255])
+        lower_red2 = np.array([170, 120, 70])
+        upper_red2 = np.array([180, 255, 255])
 
-        # Бинаризация изображения (настройте порог)
-        _, binary = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY_INV)
+        # Создание маски для красного цвета
+        mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+        mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+        red_mask = cv2.bitwise_or(mask1, mask2)
 
-        # Определяем центральную область для анализа
-        roi = binary[int(height * 0.6):, :]
+        # Оставляем только нижнюю часть изображения
+        roi = red_mask[int(height * 0.6):, :]
 
         # Находим контуры
         contours, _ = cv2.findContours(roi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)

@@ -71,8 +71,8 @@ def getConfig(sid: str) -> str:
 
 
 @sio.event
-def uploadConfig(sid: str, payload: object) -> None:
-    overrideService.uploadConfig(payload['xml'])
+def uploadConfig(sid: str, payload: object) -> str:
+    return overrideService.uploadConfig(payload['xml'])
 
 
 @sio.event

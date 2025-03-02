@@ -1,6 +1,8 @@
 import os
+import tempfile
 import xml.etree.ElementTree as ET
 from utils.Env import env
+from skeleton_xml.ConfigService import ConfigService
 
 
 class _OverrideService:
@@ -13,22 +15,36 @@ class _OverrideService:
 
         return defaultConfig
 
-    def uploadConfig(self, xml: str) -> None:
+    def uploadConfig(self, xml: str) -> str:
         defaultConfig: str = self.__getDefaultConfig()
         overrideConfig: str = self.__getOverrideConfig(defaultConfig)
 
         if xml.strip() == '':
             os.remove(overrideConfig)
 
-            return
+            return 'Config has been reset'
 
         try:
             ET.fromstring(xml)
-        except ET.ParseError:
-            return
+        except Exception as e:
+            return 'Invalid xml: ' + str(e)
 
-        with open(overrideConfig, 'w', encoding='utf-8') as file:
-            file.write(xml)
+        tmp = tempfile.NamedTemporaryFile(mode='w', encoding='utf-8')
+
+        try:
+            tmp.write(xml)
+
+            try:
+                ConfigService(config=tmp.name)
+            except Exception as e:
+                return 'Invalid config: ' + str(e)
+
+            with open(overrideConfig, mode='w', encoding='utf-8') as file:
+                file.write(xml)
+        finally:
+            tmp.close()
+
+        return 'Config is loaded'
 
     def __getDefaultConfig(self) -> str:
         return env['CONFIG']
